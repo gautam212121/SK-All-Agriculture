@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Inquiries - SK All Agriculture Parts Admin</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <style>
+        /* Inquiry Comment-Bubble layout */
+        .inquiry-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .inquiry-card {
+            background-color: var(--bg-admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: var(--transition);
+        }
+        .inquiry-card:hover {
+            border-color: rgba(228, 161, 21, 0.2);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        .inquiry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-bottom: 1px solid var(--admin-border);
+            padding-bottom: 12px;
+        }
+        .inquiry-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .inquiry-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(228, 161, 21, 0.1);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            border: 1px solid rgba(228, 161, 21, 0.2);
+        }
+        .inquiry-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+        .inquiry-date {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+        .inquiry-meta-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 13px;
+        }
+        .inquiry-meta-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--admin-border);
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .inquiry-message-bubble {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--admin-border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-white);
+            position: relative;
+        }
+        .inquiry-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="admin-wrapper" data-active-page="inquiries" data-title="Technical Inquiries" data-desc="Review and manage customer spare part compatibility questions and custom requirements.">
+        
+        <!-- Sidebar Navigation Placeholder -->
+        <div id="admin-sidebar-placeholder"></div>
+
+        <!-- Main Workspace Panel -->
+        <div class="admin-main">
+            
+            <!-- Top Header Bar Placeholder -->
+            <div id="admin-header-placeholder"></div>
+
+            <!-- Content Panel -->
+            <div class="admin-content">
+                
+                <!-- Inquiry Cards List Container -->
+                <div id="inquiries-container" class="inquiry-list">
+                    <div style="background-color: var(--bg-admin-card); border: 1px dashed var(--admin-border); border-radius: var(--radius-lg); padding: 50px 20px; text-align: center; color: var(--text-gray);">
+                        Loading technical inquiries...
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Administrative Scripts -->
+    <script src="/js/admin.js"></script>
+</body>
+</html>
+

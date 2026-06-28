@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products - SK All Agriculture Parts Admin</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+    <div id="admin-wrapper" data-active-page="products" data-title="Spare Parts Catalog" data-desc="Upload, edit, and manage your tractor, rotavator, and agriculture spare parts.">
+        
+        <!-- Sidebar Navigation Placeholder -->
+        <div id="admin-sidebar-placeholder"></div>
+
+        <!-- Main Workspace Panel -->
+        <div class="admin-main">
+            
+            <!-- Top Header Bar Placeholder -->
+            <div id="admin-header-placeholder"></div>
+
+            <!-- Content Panel -->
+            <div class="admin-content">
+                
+                <!-- Catalog Actions Bar -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px; flex-wrap: wrap;">
+                    <div></div> <!-- Spacer -->
+                    <div>
+                        <a href="/admin/add-product.html" class="admin-btn" style="background-color: var(--accent); color: var(--bg-admin-dark); font-weight: 700; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; padding: 10px 20px;">
+                            ➕ Upload New Spare Part
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Listing Card -->
+                <div class="admin-card">
+                    <div style="overflow-x: 100%;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35%;">Product / Brand Name</th>
+                                    <th>Category</th>
+                                    <th>SKU Identifier</th>
+                                    <th>Price Structure</th>
+                                    <th>Stock Level</th>
+                                    <th>Visibility</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-products-table-body">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: var(--text-gray); padding: 40px 0;">
+                                        Fetching spare parts catalog log...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Administrative Scripts -->
+    <script src="/js/admin.js"></script>
+</body>
+</html>
+

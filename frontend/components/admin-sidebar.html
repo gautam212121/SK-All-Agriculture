@@ -1,0 +1,79 @@
+<div class="admin-logo" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="/images/logo.png" alt="Logo" class="logo-img"
+            style="height: 32px; width: 32px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--accent); flex-shrink: 0;">
+        <span>SK Agriculture Parts Admin</span>
+    </div>
+    <!-- Mobile Close Button (Hidden on desktop) -->
+    <button class="admin-sidebar-close" id="admin-sidebar-close" aria-label="Close Admin Menu"
+        style="display: none; font-size: 28px; background: none; border: none; color: var(--text-gray); cursor: pointer; line-height: 1; padding: 0 4px; transition: var(--transition);">
+        &times;
+    </button>
+</div>
+
+<!-- Navigation Menu -->
+<ul class="admin-menu">
+    <li class="admin-menu-item" id="menu-dashboard">
+        <a href="/admin/dashboard.html">
+            <span></span>
+            <span>Dashboard</span>
+        </a>
+    </li>
+    <li class="admin-menu-item" id="menu-products">
+        <a href="/admin/products.html">
+            <span></span>
+            <span>Manage Products</span>
+        </a>
+    </li>
+    <li class="admin-menu-item" id="menu-categories">
+        <a href="/admin/categories.html">
+            <span></span>
+            <span>Categories</span>
+        </a>
+    </li>
+    <li class="admin-menu-item" id="menu-banners">
+        <a href="/admin/banners.html">
+            <span>🖼️</span>
+            <span>Home Banners</span>
+        </a>
+    </li>
+    <li class="admin-menu-item" id="menu-orders">
+        <a href="/admin/orders.html">
+            <span></span>
+            <span>Orders</span>
+        </a>
+    </li>
+    <li class="admin-menu-item" id="menu-users">
+        <a href="/admin/users.html">
+            <span></span>
+            <span>Customers</span>
+        </a>
+    </li>
+    <li class="admin-menu-item" id="menu-inquiries">
+        <a href="/admin/inquiries.html">
+            <span>💬</span>
+            <span>Technical Inquiries</span>
+        </a>
+    </li>
+    <li class="admin-menu-item" id="menu-inventory">
+        <a href="/admin/inventory.html">
+            <span></span>
+            <span>Stock Inventory</span>
+        </a>
+    </li>
+    <li class="admin-menu-item" id="menu-settings">
+        <a href="/admin/settings.html">
+            <span></span>
+            <span>Settings</span>
+        </a>
+    </li>
+</ul>
+
+<!-- Logout Admin -->
+<div class="admin-menu-footer">
+    <button type="button" id="admin-logout-btn" class="admin-logout-btn"
+        style="background: none; border: none; cursor: pointer; text-align: left; font-family: inherit; display: flex; align-items: center; gap: 10px; width: 100%;">
+        <span></span>
+        <span>Logout Admin</span>
+    </button>
+</div>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK All Agriculture Parts - Premium Tractor & Rotavator Spare Parts</title>
+    <meta name="description" content="Premium quality spare parts for rotavators, tractors, and agricultural machinery. Heavy-duty universal joint kits, yokes, blades, gears, and clutches. Direct WhatsApp delivery.">
+    <!-- Premium Client Styles -->
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <!-- Shared Header placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- 1. Hero Banner Section (With Dynamic Slider Support) -->
+    <section class="hero" id="hero-slider-section">
+        <div class="hero-slider-wrap" style="position: relative; width: 100%; overflow: hidden;">
+            <div class="hero-slides-container" id="hero-slides-container">
+                <!-- Default Fallback Slide -->
+                <div class="hero-slide active">
+                    <div class="container">
+                        <div class="hero-layout">
+                            <div class="hero-content">
+                                <span class="hero-tag">🌾 Professional Agricultural Equipment</span>
+                                <h1 class="hero-title">High-Tensile <span>Rotavator</span> & Tractor Spare Parts</h1>
+                                <p class="hero-desc">Engineered for heavy-duty field operations. Browse our selection of forged yokes, universal joint kits, PTO shafts, and cultivator replacement components.</p>
+                                
+                                <div class="hero-actions">
+                                    <a href="/shop.html" class="btn-accent">Explore Spare Parts</a>
+                                    <a href="#categories-section" class="btn-login" style="padding: 12px 28px;">Browse Categories</a>
+                                </div>
+
+                                <div class="hero-badge-grid">
+                                    <div class="hero-badge-item">
+                                        <h3>100%</h3>
+                                        <p>Forged Steel</p>
+                                    </div>
+                                    <div class="hero-badge-item">
+                                        <h3>Free</h3>
+                                        <p>Platform Fee</p>
+                                    </div>
+                                    <div class="hero-badge-item">
+                                        <h3>COD</h3>
+                                        <p>Cash on Delivery</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hero-image-container">
+                                <div class="hero-image-glow"></div>
+                                <img src="/uploads/prod-yoke.svg" alt="Premium Rotavator Yoke Forged Shaft" class="hero-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slider Controls (Only shown if multiple slides exist) -->
+            <button class="hero-slider-btn prev" id="hero-slider-prev" aria-label="Previous Slide" style="display: none;">&#10094;</button>
+            <button class="hero-slider-btn next" id="hero-slider-next" aria-label="Next Slide" style="display: none;">&#10095;</button>
+            
+            <!-- Slider Dots -->
+            <div class="hero-slider-dots" id="hero-slider-dots" style="display: none;">
+                <span class="dot active" data-slide="0"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Featured Categories Grid (Injected via main.js) -->
+    <section class="section-padding" id="categories-section" style="background-color: var(--bg-surface); border-top: 1px solid var(--border-light);">
+        <div class="container">
+            <div class="section-title-wrap">
+                <div>
+                    <h2 class="section-title">Spare Parts by Category</h2>
+                    <p class="section-subtitle">Find exact replacement components for your farming machinery</p>
+                </div>
+                <a href="/shop.html" style="color: var(--accent-gold); font-weight: 600; font-size: 14px;">View All Parts →</a>
+            </div>
+
+            <!-- Injected categories target grid -->
+            <div class="category-grid" id="home-categories-grid">
+                <div style="text-align: center; grid-column: span 3; color: var(--text-muted); padding: 40px 0;">Loading categories...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Popular Spare Parts (Injected via main.js) -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title-wrap">
+                <div>
+                    <h2 class="section-title">Popular Spare Parts</h2>
+                    <p class="section-subtitle">Heavy-duty components high in demand among workshop owners</p>
+                </div>
+                <a href="/shop.html?sort=price_desc" style="color: var(--accent-gold); font-weight: 600; font-size: 14px;">Sort by Premium →</a>
+            </div>
+
+            <!-- Injected popular parts target grid -->
+            <div class="product-grid" id="home-popular-grid">
+                <div style="text-align: center; grid-column: span 4; color: var(--text-muted); padding: 40px 0;">Loading popular components...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. New Arrivals Spare Parts (Injected via main.js) -->
+    <section class="section-padding" style="background-color: var(--bg-surface); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+        <div class="container">
+            <div class="section-title-wrap">
+                <div>
+                    <h2 class="section-title">New Arrivals</h2>
+                    <p class="section-subtitle">Newly cataloged hardware and replacement items for latest models</p>
+                </div>
+                <a href="/shop.html?sort=newest" style="color: var(--accent-gold); font-weight: 600; font-size: 14px;">View Newest →</a>
+            </div>
+
+            <!-- Injected new arrivals target grid -->
+            <div class="product-grid" id="home-arrivals-grid">
+                <div style="text-align: center; grid-column: span 4; color: var(--text-muted); padding: 40px 0;">Loading new arrivals...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Why Choose Us Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 54px;">
+                <h2 class="section-title">Built for Tough Fields</h2>
+                <p class="section-subtitle" style="max-width: 500px; margin: 8px auto 0 auto;">Why farmers and agricultural workshop operators trust SK All Agriculture Parts</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">🛡️</div>
+                    <h3 class="why-title">Industrial Forged Quality</h3>
+                    <p class="why-desc">All universal joints, crosses, and yokes are forged from high-density tempered carbon alloy steel to resist extreme torsional friction.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">📍</div>
+                    <h3 class="why-title">Farm Location Delivery</h3>
+                    <p class="why-desc">Our checkout system captures your precise farm coordinates via GPS, letting us dispatch riders directly to your agricultural site.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">💬</div>
+                    <h3 class="why-title">Direct WhatsApp Billing</h3>
+                    <p class="why-desc">Upon order placement, get a beautifully itemized invoice sent straight to our admin via WhatsApp for rapid verification and dispatch.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">💰</div>
+                    <h3 class="why-title">Cash on Delivery (COD)</h3>
+                    <p class="why-desc">Zero upfront transaction risks. Inspect your replacement gears, clutches, or blade bolts at your doorstep and pay only when satisfied.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Inquiry & Contact Section -->
+    <section class="section-padding" id="contact-section" style="background-color: var(--bg-surface); border-top: 1px solid var(--border-light);">
+        <div class="container">
+            <div class="inquiry-wrap">
+                <div class="inquiry-info">
+                    <h2>Got a Technical Spare Part Question?</h2>
+                    <p>Not sure if a specific PTO joint fits your Swaraj tractor or Maschio rotavator model? Drop us your details, and our agricultural engineer will call you right back.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <div style="font-size: 12px; color: var(--text-muted);">Direct Call Support</div>
+                                <div style="font-weight: 700; font-size: 16px;">+91 9026754812</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">💬</div>
+                            <div>
+                                <div style="font-size: 12px; color: var(--text-muted);">WhatsApp Inquiry</div>
+                                <div style="font-weight: 700; font-size: 16px;">+91 9026754812</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <div style="font-size: 12px; color: var(--text-muted);">Store Location</div>
+                                <div style="font-weight: 700; font-size: 16px;">BKT Lucknow, UP, India</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="inquiry-form">
+                    <div class="form-group">
+                        <label for="iq_name">Your Name</label>
+                        <input type="text" id="iq_name" required class="form-control" placeholder="Ajeet Gautam">
+                    </div>
+                    <div class="form-group">
+                        <label for="iq_phone">Mobile Number</label>
+                        <input type="tel" id="iq_phone" required class="form-control" placeholder="868568578">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="iq_machine">Compatible Machine / Tractor Model</label>
+                        <input type="text" id="iq_machine" class="form-control" placeholder="Mahindra 575 DI / Shaktiman Rotavator">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="iq_msg">Part Details / Custom Requirements</label>
+                        <textarea id="iq_msg" rows="4" required class="form-control" placeholder="I need a heavy-duty universal joint kit with grease coupling. Please share availability..."></textarea>
+                    </div>
+                    <div class="form-group full-width" style="margin-top: 10px;">
+                        <button type="submit" class="btn-accent" style="width: 100%;">Submit Technical Inquiry</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shared Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Storefront Client Interactivity Script -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
+

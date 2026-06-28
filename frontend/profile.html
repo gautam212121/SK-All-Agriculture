@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile & Addresses - SK All Agriculture Parts</title>
+    <meta name="description" content="Manage your customer credentials, saved shipping address book, and contact parameters for fast agricultural spare parts checkout.">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <!-- Shared Header placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Dashboard Container -->
+    <section class="section-padding" id="profile-container" style="min-height: 80vh;">
+        <div class="container">
+            <div class="checkout-layout" style="grid-template-columns: 280px 1fr; align-items: start; gap: 30px;">
+                
+                <!-- Account Sidebar Navigation -->
+                <div class="checkout-summary-card" style="padding: 24px; position: sticky; top: 100px; background: var(--bg-surface);">
+                    
+                    <!-- Sidebar Bio Card -->
+                    <div id="profile-sidebar-bio" style="text-align: center; border-bottom: 1px solid var(--border-light); padding-bottom: 20px; margin-bottom: 20px;">
+                        <div class="profile-user-avatar" style="width: 70px; height: 70px; border-radius: 50%; background: var(--accent-gold); color: var(--bg-dark); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; margin: 0 auto 12px auto; font-family: 'Outfit', sans-serif;">U</div>
+                        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: var(--text-light); margin-bottom: 4px;">Loading Profile...</h3>
+                        <p style="color: var(--text-muted); font-size: 13px;">...</p>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                        <li>
+                            <a href="/profile.html" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--radius-md); color: var(--accent-gold); background: rgba(212, 175, 55, 0.05); font-weight: 600; font-size: 14px; transition: all 0.3s;">
+                                👤 Profile & Addresses
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/orders.html" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 500; font-size: 14px; transition: all 0.3s;">
+                                🚜 Order History
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/cart.html" style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 500; font-size: 14px; transition: all 0.3s;">
+                                🛒 View Active Cart
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Main Content Area -->
+                <div style="display: flex; flex-direction: column; gap: 30px;">
+                    
+                    <!-- Profile Information Section -->
+                    <div class="checkout-form-card" style="padding: 30px; background: var(--bg-surface);">
+                        <h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; color: var(--text-light); margin-bottom: 20px;">Customer Profile Credentials</h2>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; background: rgba(255,255,255,0.01); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px;">
+                            <div>
+                                <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 600;">Full Name</div>
+                                <div id="profile-name-text" style="font-size: 16px; color: var(--text-light); font-weight: 700;">Loading...</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 600;">Mobile Number</div>
+                                <div id="profile-phone-text" style="font-size: 16px; color: var(--text-light); font-weight: 700;">Loading...</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 600;">Email Address</div>
+                                <div id="profile-email-text" style="font-size: 16px; color: var(--text-light); font-weight: 700;">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Addresses List Directory -->
+                    <div class="checkout-form-card" style="padding: 30px; background: var(--bg-surface);">
+                        <h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; color: var(--text-light); margin-bottom: 6px;">Saved Shipping Address Book</h2>
+                        <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 24px;">Addresses saved here will be available for quick-select during spare parts checkout.</p>
+                        
+                        <!-- Addresses Grid -->
+                        <div class="checkout-address-selector" id="profile-address-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; display: grid;">
+                            <p style="color: var(--text-muted); font-style: italic; font-size: 14px;">Loading saved addresses...</p>
+                        </div>
+                    </div>
+
+                    <!-- Add Address Form Sheet -->
+                    <div class="checkout-form-card" style="padding: 30px; background: var(--bg-surface);">
+                        <h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; color: var(--text-light); margin-bottom: 6px;">Add a New Shipping Address</h2>
+                        <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 24px;">Provide accurate shipping coordinates to minimize dispatch delays.</p>
+
+                        <form id="profile-add-address-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            
+                            <div class="form-group">
+                                <label for="recipient_name">Recipient Full Name</label>
+                                <input type="text" id="recipient_name" required class="form-control" placeholder="Ajeet Gautam">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Recipient Mobile Number</label>
+                                <input type="tel" id="phone" required class="form-control" placeholder="9026754812">
+                            </div>
+
+                            <div class="form-group full-width" style="grid-column: span 2;">
+                                <label for="address_line">Detailed Address (House/Plot, Village/Area, Landmark)</label>
+                                <input type="text" id="address_line" required class="form-control" placeholder="Plot 14, Near Primary School, BKT">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city">City / Tehsil</label>
+                                <input type="text" id="city" required class="form-control" placeholder="Lucknow">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" required class="form-control" placeholder="Uttar Pradesh">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pincode">PIN Code (6 digits)</label>
+                                <input type="text" id="pincode" required pattern="[0-9]{6}" class="form-control" placeholder="226201">
+                            </div>
+
+                            <div class="form-group" style="display: flex; align-items: flex-end; justify-content: flex-end;">
+                                <button type="submit" class="btn-accent" style="width: 100%; padding: 12px 0;">
+                                    💾 Save New Address
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Shared Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Storefront Client Interactivity Script -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
+

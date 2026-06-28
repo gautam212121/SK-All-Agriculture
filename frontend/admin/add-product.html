@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Spare Part - SK All Agriculture Parts Admin</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+    <div id="admin-wrapper" data-active-page="add-product" data-title="Upload Spare Part" data-desc="Enter technical specifications and images to list a new replacement part in the catalog.">
+        
+        <!-- Sidebar Navigation Placeholder -->
+        <div id="admin-sidebar-placeholder"></div>
+
+        <!-- Main Workspace Panel -->
+        <div class="admin-main">
+            
+            <!-- Top Header Bar Placeholder -->
+            <div id="admin-header-placeholder"></div>
+
+            <!-- Content Panel -->
+            <div class="admin-content">
+                
+                <!-- Back Link -->
+                <div style="margin-bottom: 20px;">
+                    <a href="/admin/products.html" style="color: var(--accent); font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;">
+                        ← Back to Catalog Inventory
+                    </a>
+                </div>
+
+                <!-- Upload Form Panel -->
+                <div class="admin-card">
+                    
+                    <form id="admin-add-product-form" enctype="multipart/form-data" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        
+                        <!-- Col 1: Core details -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            
+                            <h3 style="font-family: 'Outfit', sans-serif; font-size: 16px; color: var(--text-light); border-bottom: 1px solid var(--admin-border); padding-bottom: 8px; margin-bottom: 4px; font-weight: 600;">Core Identity</h3>
+
+                            <div class="form-group">
+                                <label for="name">Spare Part Name *</label>
+                                <input type="text" id="name" name="name" required class="form-control" placeholder="Universal Joint Cross Kit Swaraj Type">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category_id">Machine Division Category *</label>
+                                <select id="category_id" name="category_id" required class="form-control">
+                                    <option value="">-- Select Category --</option>
+                                    <!-- Populated dynamically via admin.js -->
+                                </select>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div class="form-group">
+                                    <label for="sku">SKU Code / Identifier *</label>
+                                    <input type="text" id="sku" name="sku" required class="form-control" placeholder="SKU-UJC-SWRJ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="brand">Brand / Forge Maker *</label>
+                                    <input type="text" id="brand" name="brand" required class="form-control" placeholder="AgriGold Forgings">
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                                <div class="form-group">
+                                    <label for="price">Standard Price (₹) *</label>
+                                    <input type="number" id="price" name="price" required min="1" step="0.01" class="form-control" placeholder="850">
+                                </div>
+                                <div class="form-group">
+                                    <label for="discount_price">Discount Price (₹)</label>
+                                    <input type="number" id="discount_price" name="discount_price" min="0" step="0.01" class="form-control" placeholder="799">
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock">Inventory Stock *</label>
+                                    <input type="number" id="stock" name="stock" required min="0" class="form-control" placeholder="45">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="short_description">Short Summary Description *</label>
+                                <textarea id="short_description" name="short_description" required rows="2" class="form-control" placeholder="Heavy-duty replacement cross kit for standard Swaraj tractor power take-off shafts."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Detailed Technical Description</label>
+                                <textarea id="description" name="description" rows="4" class="form-control" placeholder="Manufactured from premium forged steel alloy, tempered for maximum torque tolerance. Features grease nipple coupling for continuous friction lubrication and sealed needle rollers. Compatible withSwraj 744, 855 PTO splines..."></textarea>
+                            </div>
+
+                        </div>
+
+                        <!-- Col 2: Specifications and Uploads -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            
+                            <h3 style="font-family: 'Outfit', sans-serif; font-size: 16px; color: var(--text-light); border-bottom: 1px solid var(--admin-border); padding-bottom: 8px; margin-bottom: 4px; font-weight: 600;">Technical Specifications</h3>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div class="form-group">
+                                    <label for="material">Forged Material *</label>
+                                    <input type="text" id="material" name="material" required class="form-control" placeholder="Forged Alloy Steel (EN-8)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="weight">Net Weight (kg) *</label>
+                                    <input type="text" id="weight" name="weight" required class="form-control" placeholder="1.45 kg">
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div class="form-group">
+                                    <label for="compatible_model">Compatible Machine Model *</label>
+                                    <input type="text" id="compatible_model" name="compatible_model" required class="form-control" placeholder="Swaraj 744 / 855 / Swaraj Rotavator">
+                                </div>
+                                <div class="form-group">
+                                    <label for="part_usage">Application Usage *</label>
+                                    <input type="text" id="part_usage" name="part_usage" required class="form-control" placeholder="PTO Shaft / Rotavator Input Transmission">
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div class="form-group">
+                                    <label for="quality_type">Standard Quality Grade *</label>
+                                    <input type="text" id="quality_type" name="quality_type" required class="form-control" placeholder="OEM Premium Heavy Duty">
+                                </div>
+                                <div class="form-group">
+                                    <label for="warranty">Warranty Period</label>
+                                    <input type="text" id="warranty" name="warranty" class="form-control" placeholder="6 Months Manufacturer Warranty">
+                                </div>
+                            </div>
+
+                            <h3 style="font-family: 'Outfit', sans-serif; font-size: 16px; color: var(--text-light); border-bottom: 1px solid var(--admin-border); padding-bottom: 8px; margin-bottom: 4px; font-weight: 600;">Images & Catalog Visibility</h3>
+
+                            <!-- Main Image Upload -->
+                            <div class="form-group">
+                                <label for="main_image_input">Primary Product Image *</label>
+                                <input type="file" id="main_image_input" name="main_image" required accept="image/*" class="form-control" style="padding: 8px;">
+                                <div id="main_image_preview" style="margin-top: 10px;"></div>
+                            </div>
+
+                            <!-- Extra Angles Images Upload -->
+                            <div class="form-group">
+                                <label for="extra_images_input">Secondary Angle Images (Multiple)</label>
+                                <input type="file" id="extra_images_input" name="extra_images" multiple accept="image/*" class="form-control" style="padding: 8px;">
+                                <div id="extra_images_preview" style="margin-top: 10px;"></div>
+                            </div>
+
+                            <!-- Visibility Checkbox -->
+                            <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; background: rgba(255,255,255,0.01); border: 1px solid var(--admin-border); border-radius: var(--radius-sm); padding: 12px;">
+                                <input type="checkbox" id="is_active" name="is_active" checked style="width: 18px; height: 18px; cursor: pointer;">
+                                <label for="is_active" style="margin-bottom: 0; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text-light);">
+                                    Publish immediately (Visible in store catalog)
+                                </label>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div style="margin-top: 16px;">
+                                <button type="submit" class="admin-btn" style="width: 100%; padding: 14px 0; font-size: 15px; font-weight: 700; background-color: var(--accent); color: var(--bg-admin-dark);">
+                                    💾 Save Spare Part
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Administrative Scripts -->
+    <script src="/js/admin.js"></script>
+</body>
+</html>
+

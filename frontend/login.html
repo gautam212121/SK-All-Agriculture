@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - SK All Agriculture Parts</title>
+    <meta name="description" content="Access your account to manage orders, update shipping addresses, and review agricultural spare parts transactions.">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <!-- Shared Header placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Login Authentication Section -->
+    <section class="section-padding" style="min-height: 75vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(20,20,20,0.8) 0%, rgba(10,10,10,0.95) 100%);">
+        <div class="container" style="max-width: 480px;">
+            
+            <div class="checkout-form-card" style="padding: 40px; border: 1px solid var(--border-light); background: var(--bg-surface); box-shadow: 0 15px 35px rgba(0,0,0,0.4);">
+                
+                <!-- Title Header -->
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="font-size: 40px; margin-bottom: 12px;">🚜</div>
+                    <h1 id="auth-type-title" style="font-family: 'Outfit', sans-serif; font-size: 24px; color: var(--text-light); margin-bottom: 8px;">Customer Sign In</h1>
+                    <p id="auth-type-desc" style="color: var(--text-muted); font-size: 13px; line-height: 1.4;">Sign in to browse our catalog, manage cart, and place orders.</p>
+                </div>
+
+                <!-- Unified Form -->
+                <form id="login-form" style="display: flex; flex-direction: column; gap: 20px;">
+                    
+                    <!-- Username Container (Admin) -->
+                    <div class="form-group" id="username-input-container" style="display: none; flex-direction: column; gap: 8px;">
+                        <label for="username">Administrative Username</label>
+                        <input type="text" id="username" class="form-control" placeholder="admin">
+                    </div>
+
+                    <!-- Email Container (Customer) -->
+                    <div class="form-group" id="email-input-container" style="display: flex; flex-direction: column; gap: 8px;">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required class="form-control" placeholder="ajeet@gmail.com">
+                    </div>
+
+                    <!-- Password Container (Shared) -->
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <label for="password">Security Password</label>
+                        </div>
+                        <input type="password" id="password" required class="form-control" placeholder="••••••••">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div style="margin-top: 10px;">
+                        <button type="submit" class="btn-accent" style="width: 100%; padding: 14px 0; font-size: 15px; font-weight: 600;">
+                            Sign In ➔
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Navigation Pathway Links -->
+                <div id="auth-pathway-links" style="text-align: center; margin-top: 24px; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border-light); padding-top: 20px;">
+                    Don't have an account? 
+                    <a href="/register.html" style="color: var(--accent-gold); font-weight: 600; text-decoration: none; margin-left: 4px;">Register here</a>
+                    <div style="margin-top: 12px; font-size: 12px;">
+                        Are you an administrator? 
+                        <a href="/login.html?admin=true" style="color: var(--text-light); font-weight: 500;">Access Control Center 🔑</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Return to Homepage -->
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="/index.html" style="font-size: 13px; color: var(--text-muted);">← Back to Storefront Home</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Shared Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Storefront Client Interactivity Script -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
+

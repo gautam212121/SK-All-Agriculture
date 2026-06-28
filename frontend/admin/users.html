@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Directory - SK All Agriculture Parts Admin</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+    <div id="admin-wrapper" data-active-page="users" data-title="Customers Directory" data-desc="Review registered store customers, checkout frequencies, and total sales valuations.">
+        
+        <!-- Sidebar Navigation Placeholder -->
+        <div id="admin-sidebar-placeholder"></div>
+
+        <!-- Main Workspace Panel -->
+        <div class="admin-main">
+            
+            <!-- Top Header Bar Placeholder -->
+            <div id="admin-header-placeholder"></div>
+
+            <!-- Content Panel -->
+            <div class="admin-content">
+                
+                <!-- Customers Table Card -->
+                <div class="admin-card">
+                    <div style="overflow-x: auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35%;">Customer Name / Email</th>
+                                    <th>Mobile Number</th>
+                                    <th>Fulfillment Frequency</th>
+                                    <th>Total Sales Valuations</th>
+                                    <th style="text-align: right;">Action Contact</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-table-body">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: var(--text-gray); padding: 40px 0;">
+                                        Fetching customer registration directory...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Administrative Scripts -->
+    <script src="/js/admin.js"></script>
+</body>
+</html>
+

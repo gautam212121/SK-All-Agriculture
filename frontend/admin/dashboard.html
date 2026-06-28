@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SK All Agriculture Parts</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+    <div id="admin-wrapper" data-active-page="dashboard" data-title="Dashboard Overview" data-desc="Analytical overview of shop sales, stock levels, and order pipelines.">
+        
+        <!-- Sidebar Navigation Placeholder -->
+        <div id="admin-sidebar-placeholder"></div>
+
+        <!-- Main Workspace Panel -->
+        <div class="admin-main">
+            
+            <!-- Top Header Bar Placeholder -->
+            <div id="admin-header-placeholder"></div>
+
+            <!-- Content Panel -->
+            <div class="admin-content">
+                
+                <!-- Analytics Metric Widgets Grid -->
+                <div class="admin-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                    
+                    <!-- Sales Revenue Card -->
+                    <div class="widget-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                            <span class="widget-label">Total Sales Revenue</span>
+                            <span style="font-size: 24px;">💰</span>
+                        </div>
+                        <h2 class="widget-val" id="dash-revenue">₹0.00</h2>
+                        <p style="color: var(--text-gray); font-size: 11px; margin-top: 6px;">Cash on Delivery completed orders</p>
+                    </div>
+
+                    <!-- Total Orders Card -->
+                    <div class="widget-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                            <span class="widget-label">Total Orders Placed</span>
+                            <span style="font-size: 24px;">🚜</span>
+                        </div>
+                        <h2 class="widget-val" id="dash-orders-count">0</h2>
+                        <p style="color: var(--text-gray); font-size: 11px; margin-top: 6px;">Total customer transaction count</p>
+                    </div>
+
+                    <!-- Pending Orders Card -->
+                    <div class="widget-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                            <span class="widget-label">Pending Dispatch</span>
+                            <span style="font-size: 24px;">⏳</span>
+                        </div>
+                        <h2 class="widget-val" id="dash-pending-count">0</h2>
+                        <p style="color: var(--text-gray); font-size: 11px; margin-top: 6px;">Awaiting verification / transit</p>
+                    </div>
+
+                    <!-- Out of Stock Card -->
+                    <div class="widget-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                            <span class="widget-label">Out of Stock Parts</span>
+                            <span style="font-size: 24px;">⚠️</span>
+                        </div>
+                        <h2 class="widget-val" id="dash-outofstock-count" style="color: #e53935;">0</h2>
+                        <p style="color: var(--text-gray); font-size: 11px; margin-top: 6px;">Parts requiring stock updates</p>
+                    </div>
+
+                </div>
+
+                <!-- Recent Orders Datatable Card -->
+                <div class="admin-card">
+                    <div class="admin-card-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--admin-border); padding-bottom: 16px; margin-bottom: 20px;">
+                        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; color: var(--text-light);">Recent Orders Log</h3>
+                        <a href="/admin/orders.html" class="admin-btn admin-btn-secondary" style="font-size: 13px; padding: 6px 14px;">View All Orders</a>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Shipping Destination</th>
+                                    <th>Grand Total</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dash-recent-orders-body">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: var(--text-gray); padding: 30px 0;">
+                                        Fetching analytical log records...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Administrative Scripts -->
+    <script src="/js/admin.js"></script>
+</body>
+</html>
+

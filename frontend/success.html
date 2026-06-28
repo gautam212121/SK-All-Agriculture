@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed Successfully - SK All Agriculture Parts</title>
+    <meta name="description" content="Thank you for your order. Redirecting to WhatsApp to send the invoice and finalize your Cash on Delivery spare parts dispatch.">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <!-- Shared Header placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Success Message & Receipt Card Section -->
+    <section class="section-padding" style="min-height: 70vh; display: flex; align-items: center;">
+        <div class="container" style="max-width: 650px;">
+            
+            <div id="success-receipt-card" class="checkout-summary-card" style="text-align: center; padding: 40px; border: 1px solid var(--accent-gold); box-shadow: 0 10px 40px rgba(212, 175, 55, 0.08); background: var(--bg-surface);">
+                
+                <div style="font-size: 64px; margin-bottom: 20px; animation: pulse 2s infinite;">🌾</div>
+                
+                <h1 style="font-family: 'Outfit', sans-serif; font-size: 32px; color: var(--text-light); margin-bottom: 12px;">Order Submitted!</h1>
+                <p style="color: var(--text-muted); font-size: 15px; max-width: 480px; margin: 0 auto 30px auto;">
+                    Your Cash on Delivery order has been registered on our servers. To ensure immediate dispatch, please send the invoice receipt to our store operator on WhatsApp.
+                </p>
+
+                <!-- Order Details Widget -->
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px; margin-bottom: 30px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px dashed var(--border-light); padding-bottom: 12px;">
+                        <span style="color: var(--text-muted); font-size: 14px;">Order Status</span>
+                        <span class="status-badge pending" style="font-size: 12px;">PENDING CONFIRMATION</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                        <span style="color: var(--text-muted); font-size: 14px;">Order Identifier</span>
+                        <span id="success-order-id" style="color: var(--text-light); font-weight: 700; font-family: monospace; font-size: 15px;">#0000</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                        <span style="color: var(--text-muted); font-size: 14px;">Payment Mode</span>
+                        <span style="color: var(--accent-gold); font-weight: 600; font-size: 14px;">Cash on Delivery (COD)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--border-light); padding-top: 12px; margin-top: 12px;">
+                        <span style="color: var(--text-light); font-weight: 600; font-size: 15px;">Amount Payable</span>
+                        <span id="success-grand-total" style="color: var(--accent-gold); font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700;">₹0.00</span>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div style="margin-bottom: 24px;">
+                    <a id="success-wa-btn" href="#" target="_blank" class="btn-accent" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px 0; font-size: 16px; background-color: #25D366; border-color: #25D366; color: #fff;">
+                        <span style="font-size: 20px;">💬</span> Send Invoice to WhatsApp
+                    </a>
+                </div>
+
+                <!-- Redirect Countdown -->
+                <div id="success-countdown-wrapper" style="font-size: 13px; color: var(--text-muted);">
+                    Redirecting to WhatsApp automatically in <span id="success-countdown-number" style="color: var(--accent-gold); font-weight: 700; font-size: 15px;">3</span> seconds...
+                </div>
+                
+            </div>
+
+            <!-- Return Button -->
+            <div style="text-align: center; margin-top: 24px;">
+                <a href="/orders.html" style="color: var(--text-muted); font-size: 14px; text-decoration: underline;">Or view your Order History</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Shared Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Storefront Client Interactivity Script -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
+

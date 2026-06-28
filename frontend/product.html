@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | SK All Agriculture Parts</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="container" style="padding: 40px 24px 80px 24px;" id="product-detail-container">
+        <!-- Breadcrumbs (Injected via main.js) -->
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 30px;" id="product-breadcrumbs">
+            <a href="/index.html">Home</a> &nbsp;/&nbsp; <span style="color: var(--text-muted);">Spare Parts Details</span>
+        </div>
+
+        <!-- Product Grid Layout (Images Left, Info Right) -->
+        <div class="detail-layout">
+            
+            <!-- IMAGES GALLERY (LEFT) -->
+            <div class="detail-gallery">
+                <!-- Main View -->
+                <div class="detail-main-img">
+                    <img id="product-main-img-view" src="/uploads/cat-default.png" alt="Spare Part View">
+                </div>
+                <!-- Thumbnails selection row (Injected via main.js) -->
+                <div class="detail-thumb-row" id="product-thumbs-row"></div>
+            </div>
+
+            <!-- PRODUCT INFO & ACTIONS (RIGHT) -->
+            <div class="detail-info">
+                <span class="detail-brand" id="product-brand-text">Manufacturer</span>
+                <h1 class="detail-title" id="product-title-text">Loading part details...</h1>
+
+                <!-- Badges & stock indicator (Injected via main.js) -->
+                <div class="detail-meta-pill-row" id="product-badges-row"></div>
+
+                <!-- Pricing Box (Injected via main.js) -->
+                <div class="detail-price-box" id="product-price-box"></div>
+
+                <!-- Short description (Injected via main.js) -->
+                <p class="detail-desc" id="product-short-desc"></p>
+
+                <!-- Quantity spinners & Cart Button (Injected via main.js) -->
+                <div id="product-actions-container"></div>
+
+                <!-- Technical Specifications Table (Injected via main.js) -->
+                <div style="border-top: 1px solid var(--border-light); padding-top: 30px; margin-top: 10px;">
+                    <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; margin-bottom: 16px;">Technical Specifications</h3>
+                    <table class="detail-specs-table" id="product-specs-table">
+                        <tr><td colspan="2" style="color: var(--text-muted); font-size: 13px;">Loading technical data sheet...</td></tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Detailed Description Section (Injected if present) -->
+        <section id="product-full-desc-section" style="margin-top: 60px; border-top: 1px solid var(--border-light); padding-top: 40px; display: none;">
+            <h2 style="font-family: 'Outfit', sans-serif; font-size: 24px; margin-bottom: 16px;">Product Description</h2>
+            <div style="color: var(--text-muted); line-height: 1.7; font-size: 15px;">
+                <p id="product-full-desc-text" style="white-space: pre-line;"></p>
+            </div>
+        </section>
+
+        <!-- RELATED PRODUCTS SECTION (Injected if present) -->
+        <section id="product-related-section" style="margin-top: 80px; border-top: 1px solid var(--border-light); padding-top: 50px; display: none;">
+            <div class="section-title-wrap">
+                <div>
+                    <h2 class="section-title" style="font-size: 28px;">Related Spare Parts</h2>
+                    <p class="section-subtitle">Often purchased together for rotavator and PTO rebuilds</p>
+                </div>
+            </div>
+
+            <div class="product-grid" id="product-related-grid"></div>
+        </section>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
+
