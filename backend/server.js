@@ -52,14 +52,45 @@ defaultImages.forEach(img => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Improved CORS Middleware for secure cross-domain requests
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : ['http://localhost:3000', 'http://localhost:5076'];
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin) || !process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+        res.setHeader('Access-Control-Allow-Origin', origin || '*');
+    }
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('X-XSS-Protection', '1; mode=block');
+    
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
+
+// Trust proxy for secure cookies in production (Render, Heroku, etc.)
+app.set('trust proxy', 1);
+
 // 3. Session Configuration
+const isProd = process.env.NODE_ENV === 'production';
+if (!process.env.SESSION_SECRET && isProd) {
+    console.error('❌ CRITICAL: SESSION_SECRET environment variable is not set in production!');
+    process.exit(1);
+}
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'agri_parts_decoupled_secure_secret_key_2026',
+    secret: process.env.SESSION_SECRET || 'dev-session-secret-change-in-production',
     resave: false,
     saveUninitialized: true,
     cookie: {
         maxAge: 24 * 60 * 60 * 1000, // 24 Hours
-        secure: false // Set to true if running HTTPS
+        secure: isProd, // Must be true in production to allow SameSite=None
+        httpOnly: true, // Prevent XSS attacks
+        sameSite: isProd ? 'none' : 'lax' // Required for cross-domain cookies
     }
 }));
 
@@ -72,23 +103,30 @@ app.use('/api/auth', authRoutes);
 app.use('/api', shopRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Health Check Endpoint (for monitoring and load balancers)
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // 5. Host Static Files
 // A. Serve backend uploads (images) at /uploads/...
 app.use(express.static(path.join(__dirname, 'public')));
 
-// B. Serve the frontend static client folder at the root /
-// Going up one level from backend/ reaches project root, where frontend/ lives
-app.use(express.static(path.join(__dirname, '../frontend')));
+// B. Redirect stale static-admin URLs to the decoupled Next.js frontend routes.
+app.get('/admin/dashboard.html', (req, res) => {
+    res.redirect(302, `${frontendUrl}/admin`);
+});
 
-// Handle client-side routing fallback (serve index.html for undefined HTML requests, 
-// letting the frontend handle page routing or show its own 404)
+// Handle unknown routes. The Next.js frontend runs separately in development.
 app.use((req, res, next) => {
-    // If request is looking for an API route, return JSON 404
     if (req.url.startsWith('/api')) {
         return res.status(404).json({ success: false, message: 'API Endpoint Not Found.' });
     }
-    // Else fallback to serving frontend index.html
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+    res.status(404).json({
+        success: false,
+        message: 'Frontend is served by the Next.js app.',
+        frontendUrl
+    });
 });
 
 // 6. Launch Server
@@ -98,13 +136,12 @@ async function startServer() {
 
     app.listen(PORT, () => {
         console.log(`=======================================================`);
-        console.log(`🚜 SK All Agriculture Parts Decoupled API Server running on port ${PORT}`);
-        console.log(`🔗 Frontend Storefront: http://localhost:${PORT}`);
-        console.log(`🔗 Frontend Admin Dashboard: http://localhost:${PORT}/admin/dashboard.html`);
-        console.log(`🛠️ Default Admin: username: admin | password: admin123`);
+        console.log(` SK All Agriculture Parts Decoupled API Server running on port ${PORT}`);
+        console.log(` Frontend Storefront: ${frontendUrl}`);
+        console.log(` Frontend Admin Dashboard: ${frontendUrl}/admin`);
+        console.log(` Default Admin: username: admin | password: admin123`);
         console.log(`=======================================================`);
     });
 }
 
 startServer();
-

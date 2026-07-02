@@ -12,6 +12,25 @@ function slugify(text) {
         .replace(/\-\-+/g, '-');
 }
 
+function toNumber(value) {
+    const number = Number(value);
+    return Number.isFinite(number) ? number : 0;
+}
+
+function parseActiveFlag(value, fallback = 1) {
+    if (value === undefined || value === null || value === '') {
+        return fallback;
+    }
+    return value === 'on' || value === '1' || value === true || value === 1 ? 1 : 0;
+}
+
+const VALID_ORDER_STATUSES = new Set(['PENDING', 'CONFIRMED', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED']);
+const VALID_PAYMENT_STATUSES = new Set(['PENDING', 'PAID', 'COD', 'FAILED']);
+
+function normalizeEnumValue(value) {
+    return typeof value === 'string' ? value.trim().toUpperCase() : '';
+}
+
 // 1. Dashboard Analytics
 exports.getDashboard = async (req, res) => {
     try {
@@ -27,26 +46,44 @@ exports.getDashboard = async (req, res) => {
         const outOfStockResult = await query("SELECT COUNT(*) as count FROM products WHERE stock = 0");
         const outOfStockCount = outOfStockResult[0].count;
 
+        const productCountResult = await query("SELECT COUNT(*) as count FROM products");
+        const totalProducts = productCountResult[0].count;
+
         const userCountResult = await query("SELECT COUNT(*) as count FROM users");
         const totalUsers = userCountResult[0].count;
 
         const recentOrders = await query(
-            `SELECT o.*, u.name as user_name 
+            `SELECT o.*, o.total_amount AS total, u.name as user_name 
              FROM orders o 
              JOIN users u ON o.user_id = u.id 
              ORDER BY o.created_at DESC LIMIT 5`
         );
 
+        const stats = {
+            totalRevenue: toNumber(totalSales),
+            totalOrders,
+            totalProducts,
+            totalUsers,
+            pendingOrders,
+            outOfStockCount
+        };
+
         res.json({
             success: true,
+            stats,
             analytics: {
-                totalSales: parseFloat(totalSales),
+                totalSales: stats.totalRevenue,
                 totalOrders,
                 pendingOrders,
                 outOfStockCount,
+                totalProducts,
                 totalUsers
             },
-            recentOrders
+            recentOrders: recentOrders.map(order => ({
+                ...order,
+                total: toNumber(order.total),
+                total_amount: toNumber(order.total_amount)
+            }))
         });
     } catch (error) {
         console.error('Admin Dashboard API error:', error);
@@ -100,7 +137,7 @@ exports.postAddProduct = async (req, res) => {
                 discount_price ? parseFloat(discount_price) : null, 
                 stock, short_description, description, mainImagePath, 
                 material, weight, compatible_model, part_usage, 
-                quality_type, warranty || null, is_active === 'on' || is_active === '1' || is_active === true ? 1 : 0
+                quality_type, warranty || null, parseActiveFlag(is_active, 1)
             ]
         );
 
@@ -170,7 +207,7 @@ exports.postEditProduct = async (req, res) => {
 
         if (req.files && req.files['main_image']) {
             mainImagePath = '/uploads/' + req.files['main_image'][0].filename;
-            const oldPath = path.join(__dirname, '../public', product.main_image);
+            const oldPath = path.join(__dirname, '../../public', product.main_image);
             if (fs.existsSync(oldPath) && product.main_image.startsWith('/uploads/')) {
                 try { fs.unlinkSync(oldPath); } catch (e) { console.warn('Old image unlink failed:', e.message); }
             }
@@ -190,7 +227,7 @@ exports.postEditProduct = async (req, res) => {
                 discount_price ? parseFloat(discount_price) : null, 
                 stock, short_description, description, mainImagePath, 
                 material, weight, compatible_model, part_usage, 
-                quality_type, warranty || null, is_active === 'on' || is_active === '1' || is_active === true ? 1 : 0,
+                quality_type, warranty || null, parseActiveFlag(is_active, product.is_active),
                 id
             ]
         );
@@ -220,14 +257,14 @@ exports.postDeleteProduct = async (req, res) => {
         const products = await query('SELECT main_image FROM products WHERE id = ?', [id]);
         if (products.length > 0) {
             const product = products[0];
-            const imagePath = path.join(__dirname, '../public', product.main_image);
+            const imagePath = path.join(__dirname, '../../public', product.main_image);
             if (fs.existsSync(imagePath) && product.main_image.startsWith('/uploads/')) {
                 try { fs.unlinkSync(imagePath); } catch (e) {}
             }
 
             const extraImages = await query('SELECT image_url FROM product_images WHERE product_id = ?', [id]);
             for (const img of extraImages) {
-                const extraPath = path.join(__dirname, '../public', img.image_url);
+                const extraPath = path.join(__dirname, '../../public', img.image_url);
                 if (fs.existsSync(extraPath) && img.image_url.startsWith('/uploads/')) {
                     try { fs.unlinkSync(extraPath); } catch (e) {}
                 }
@@ -363,12 +400,19 @@ exports.postDeleteCategory = async (req, res) => {
 exports.getOrders = async (req, res) => {
     try {
         const orders = await query(
-            `SELECT o.*, u.name as user_name 
+            `SELECT o.*, o.total_amount AS total, u.name as user_name 
              FROM orders o 
              JOIN users u ON o.user_id = u.id 
              ORDER BY o.created_at DESC`
         );
-        res.json({ success: true, orders });
+        res.json({
+            success: true,
+            orders: orders.map(order => ({
+                ...order,
+                total: toNumber(order.total),
+                total_amount: toNumber(order.total_amount)
+            }))
+        });
     } catch (error) {
         console.error('Orders List API error:', error);
         res.status(500).json({ success: false, message: 'Server error loading order logs.' });
@@ -380,7 +424,7 @@ exports.getOrderDetails = async (req, res) => {
     const { id } = req.params;
     try {
         const orderResult = await query(
-            `SELECT o.*, u.name as user_name, u.email as user_email, u.phone as user_phone 
+            `SELECT o.*, o.total_amount AS total, u.name as user_name, u.email as user_email, u.phone as user_phone 
              FROM orders o 
              JOIN users u ON o.user_id = u.id 
              WHERE o.id = ?`,
@@ -391,7 +435,15 @@ exports.getOrderDetails = async (req, res) => {
             return res.status(404).json({ success: false, message: 'Order not found.' });
         }
 
-        const order = orderResult[0];
+        const platformFee = toNumber(orderResult[0].platform_fee);
+        const totalAmount = toNumber(orderResult[0].total_amount);
+        const order = {
+            ...orderResult[0],
+            subtotal: Math.max(totalAmount - platformFee, 0),
+            platform_fee: platformFee,
+            total: toNumber(orderResult[0].total),
+            total_amount: totalAmount
+        };
 
         const items = await query(
             `SELECT oi.*, p.name, p.brand, p.sku, p.main_image 
@@ -401,7 +453,15 @@ exports.getOrderDetails = async (req, res) => {
             [id]
         );
 
-        res.json({ success: true, order, items });
+        res.json({
+            success: true,
+            order,
+            items: items.map(item => ({
+                ...item,
+                price: toNumber(item.price),
+                total: toNumber(item.price) * toNumber(item.quantity)
+            }))
+        });
 
     } catch (error) {
         console.error('Admin Order Details API error:', error);
@@ -413,12 +473,30 @@ exports.getOrderDetails = async (req, res) => {
 exports.postUpdateOrderStatus = async (req, res) => {
     const { id } = req.params;
     const { status, payment_status } = req.body;
+    const nextStatus = normalizeEnumValue(status);
+    const nextPaymentStatus = normalizeEnumValue(payment_status);
 
     try {
-        await query(
-            'UPDATE orders SET status = ?, payment_status = ? WHERE id = ?',
-            [status, payment_status, id]
-        );
+        if (!VALID_ORDER_STATUSES.has(nextStatus)) {
+            return res.status(400).json({ success: false, message: 'Invalid order status.' });
+        }
+
+        if (payment_status !== undefined && payment_status !== null && payment_status !== '' && !VALID_PAYMENT_STATUSES.has(nextPaymentStatus)) {
+            return res.status(400).json({ success: false, message: 'Invalid payment status.' });
+        }
+
+        if (nextPaymentStatus) {
+            await query(
+                'UPDATE orders SET status = ?, payment_status = ? WHERE id = ?',
+                [nextStatus, nextPaymentStatus, id]
+            );
+        } else {
+            await query(
+                'UPDATE orders SET status = ? WHERE id = ?',
+                [nextStatus, id]
+            );
+        }
+
         res.json({ success: true, message: 'Order status updated successfully.' });
     } catch (error) {
         console.error('Update Order Status API error:', error);
@@ -495,7 +573,13 @@ exports.postUpdateProfile = async (req, res) => {
         req.session.admin.name = name;
         req.session.admin.email = email;
 
-        res.json({ success: true, message: 'Profile updated successfully!', admin: req.session.admin });
+        req.session.save((err) => {
+            if (err) {
+                console.error('[Admin Profile Update Error] Session save failed:', err);
+                return res.status(500).json({ success: false, message: 'Failed to save updated session.' });
+            }
+            res.json({ success: true, message: 'Profile updated successfully!', admin: req.session.admin });
+        });
 
     } catch (error) {
         console.error('Admin Profile Update API error:', error);
@@ -649,5 +733,3 @@ exports.postEditBanner = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error updating banner.' });
     }
 };
-
-

@@ -246,15 +246,23 @@ exports.getLastSuccess = (req, res) => {
 exports.getMyOrders = async (req, res) => {
     try {
         const orders = await query(
-            'SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC', 
+            'SELECT *, total_amount AS total FROM orders WHERE user_id = ? ORDER BY created_at DESC', 
             [req.session.user.id]
         );
-        res.json({ success: true, orders });
+        res.json({
+            success: true,
+            orders: orders.map(order => ({
+                ...order,
+                total: parseFloat(order.total_amount) || 0,
+                total_amount: parseFloat(order.total_amount) || 0
+            }))
+        });
     } catch (error) {
         console.error('My orders API error:', error);
         res.status(500).json({ success: false, message: 'Server error fetching order history.' });
     }
 };
+
 
 // Returns detailed order specifications
 exports.getOrderDetails = async (req, res) => {
@@ -262,7 +270,7 @@ exports.getOrderDetails = async (req, res) => {
         const { id } = req.params;
         
         const orderResult = await query(
-            'SELECT * FROM orders WHERE id = ? AND user_id = ?',
+            'SELECT *, total_amount AS total FROM orders WHERE id = ? AND user_id = ?',
             [id, req.session.user.id]
         );
 

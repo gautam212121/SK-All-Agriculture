@@ -1,0 +1,23 @@
+{
+  "name": "agri-parts-ecommerce",
+  "version": "1.0.0",
+  "description": "SK Agriculture Parts - E-Commerce Platform",
+  "private": true,
+  "scripts": {
+    "setup": "node setup.js",
+    "validate": "node validate.js",
+    "test:api": "node test-api.js",
+    "dev": "echo 'Start backend and frontend separately' && echo 'Backend: cd backend && npm run dev' && echo 'Frontend: cd frontend && npm run dev'",
+    "backend:dev": "cd backend && npm run dev",
+    "backend:start": "cd backend && npm start",
+    "backend:prod": "cd backend && npm run prod",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:start": "cd frontend && npm start",
+    "frontend:lint": "cd frontend && npm run lint",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  }
+}

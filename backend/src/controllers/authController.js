@@ -3,6 +3,7 @@ const { query } = require('../config/db');
 
 // Check Current Session Status (Me Endpoint)
 exports.getMe = (req, res) => {
+    console.log('[getMe] Current Session:', req.sessionID, 'User:', req.session.user ? req.session.user.email : 'None', 'Admin:', req.session.admin ? req.session.admin.username : 'None');
     const cart = req.session.cart || [];
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -75,10 +76,16 @@ exports.postLogin = async (req, res) => {
             phone: user.phone
         };
 
-        res.json({ 
-            success: true, 
-            message: 'Login successful.', 
-            user: req.session.user 
+        req.session.save((err) => {
+            if (err) {
+                console.error('[Login Error] Session save failed:', err);
+                return res.status(500).json({ success: false, message: 'Server error saving session.' });
+            }
+            res.json({ 
+                success: true, 
+                message: 'Login successful.', 
+                user: req.session.user 
+            });
         });
 
     } catch (error) {
@@ -130,12 +137,18 @@ exports.postAdminLogin = async (req, res) => {
             username: admin.username,
             email: admin.email
         };
-        console.log('[Admin Login Success] Session created for:', admin.username);
+        console.log('[Admin Login Success] Session created for:', admin.username, 'SessionID:', req.sessionID);
 
-        res.json({ 
-            success: true, 
-            message: 'Administrative login successful.', 
-            admin: req.session.admin 
+        req.session.save((err) => {
+            if (err) {
+                console.error('[Admin Login Error] Session save failed:', err);
+                return res.status(500).json({ success: false, message: 'Server error saving session.' });
+            }
+            res.json({ 
+                success: true, 
+                message: 'Administrative login successful.', 
+                admin: req.session.admin 
+            });
         });
 
     } catch (error) {

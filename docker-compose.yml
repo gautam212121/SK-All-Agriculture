@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: agri-parts-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS:-root123}
+      MYSQL_DATABASE: ${DB_NAME:-agri_parts_db}
+      MYSQL_USER: ${DB_USER:-agri_user}
+      MYSQL_PASSWORD: ${DB_PASS:-agri_pass}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/database.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - agri-network
+
+  # Backend API Server
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: agri-parts-api
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3001
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-agri_user}
+      DB_PASS: ${DB_PASS:-agri_pass}
+      DB_NAME: ${DB_NAME:-agri_parts_db}
+      SESSION_SECRET: ${SESSION_SECRET:-change-me-in-production}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+    ports:
+      - "3001:3001"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./backend/public/uploads:/app/public/uploads
+    networks:
+      - agri-network
+    restart: unless-stopped
+
+  # Frontend Application
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: agri-parts-frontend
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3001}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - agri-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  agri-network:
+    driver: bridge
